@@ -24,8 +24,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     var signupActive = true
     var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     
-    @IBAction func toggleSignup(sender: AnyObject) {
-        
+
+    @IBAction func toggleSignUp(sender: AnyObject) {
         
         if signupActive == true {
             
@@ -50,14 +50,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             
             alreadyRegisteredLabel.text = "Already Registered?"
             
-            loginButton.setTitle("Log In", forState: UIControlState.Normal)
+            loginButton.setTitle("Login", forState: UIControlState.Normal)
             
             
         }
-
-        
-        
-        
         
     }
     
@@ -75,6 +71,123 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
     }
     
+
+    
+    @IBAction func signup(sender: AnyObject) {
+        
+        var error = ""
+        
+        if username.text == "" || password.text == "" {
+            
+            error = "Please enter a username and password"
+            
+        }
+        
+        
+        if error != "" {
+            
+            displayAlert("Error In Form", error: error)
+            
+        } else {
+            
+            activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+            
+            if signupActive == true {
+                
+                var user = PFUser()
+                user.username = username.text
+                user.password = password.text
+                
+                user.signUpInBackgroundWithBlock {
+                    (succeeded: Bool!, signupError: NSError!) -> Void in
+                    
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                    
+                    if signupError == nil  {
+                        // Hooray! Let them use the app now.
+                        
+                        println("signed up")
+                        
+                        
+                    } else {
+                        if let errorString = signupError.userInfo?["error"] as? NSString {
+                            
+                            // Update - added as! String
+                            
+                            error = errorString as String!
+                            
+                        } else {
+                            
+                            error = "Please try again later."
+                            
+                        }
+                        
+                        self.displayAlert("Could Not Sign Up", error: error)
+                        
+                    }
+                }
+                
+            } else {
+                
+                PFUser.logInWithUsernameInBackground(username.text, password:password.text) {
+                    (user: PFUser!, signupError: NSError!) -> Void in
+                    
+                    
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                    
+                    if signupError == nil {
+                        
+                        println("logged in")
+                        
+                        self.performSegueWithIdentifier("jumpToUserTable", sender: self)
+                        
+                    } else {
+                        
+                        if let errorString = signupError.userInfo?["error"] as? NSString {
+                            
+                            // Update - added as! String
+                            
+                            error = errorString as String!
+                            
+                        } else {
+                            
+                            error = "Please try again later."
+                            
+                        }
+                        
+                        self.displayAlert("Could Not Log In", error: error)
+                        
+                        
+                    }
+                }
+                
+                
+            }
+            
+            
+        }
+
+        
+    }
+    
+    
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        if PFUser.currentUser() != nil {
+            
+            self.performSegueWithIdentifier("jumpToUserTable", sender: self)
+            
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -82,9 +195,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        
     }
     
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -94,24 +207,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     
