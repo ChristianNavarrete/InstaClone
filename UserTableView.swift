@@ -14,7 +14,7 @@ class UserTableView: UITableViewController {
     var users = [""]
     var following = [Bool]()
     
-    
+    var refresher:UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,24 @@ class UserTableView: UITableViewController {
         
         println(PFUser.currentUser())
         
+        updateUsers()
+        
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresher.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refresher)
+        
+        
+        
+    }
+    
+    func updateUsers() {
+        
         var query = PFUser.query()
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             
-            self.users.removeAll(keepCapacity: true)
+            self.users.removeAll(keepCapacity: false)
             
             for object in objects {
                 
@@ -61,6 +74,9 @@ class UserTableView: UITableViewController {
                             // Log details of the failure
                             println(error)
                         }
+                        
+                        self.refresher.endRefreshing()
+                        
                     }
                     
                 }
@@ -69,11 +85,17 @@ class UserTableView: UITableViewController {
             }
             
             
-            
         })
+
         
+    }
+    
+    
+    func refresh() {
         
+        println("refreshed")
         
+        updateUsers()
     }
     
     override func didReceiveMemoryWarning() {

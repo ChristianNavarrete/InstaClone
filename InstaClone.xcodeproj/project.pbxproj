@@ -27,6 +27,8 @@
 		A9A2D17F1AD8633B009B78FE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A2D17E1AD8633B009B78FE /* libz.dylib */; };
 		A9A2D1811AD86347009B78FE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A2D1801AD86347009B78FE /* libsqlite3.dylib */; };
 		A9B4F0201ADC70DC00DBD09A /* UserTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B4F01F1ADC70DC00DBD09A /* UserTableView.swift */; };
+		A9B4F0221ADC9BCC00DBD09A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B4F0211ADC9BCC00DBD09A /* PostViewController.swift */; };
+		A9B4F0241ADCA5C300DBD09A /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = A9B4F0231ADCA5C200DBD09A /* blank.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		A9A2D1801AD86347009B78FE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A9A2D1831AD863B4009B78FE /* InstaClone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InstaClone-Bridging-Header.h"; sourceTree = "<group>"; };
 		A9B4F01F1ADC70DC00DBD09A /* UserTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableView.swift; path = ../UserTableView.swift; sourceTree = "<group>"; };
+		A9B4F0211ADC9BCC00DBD09A /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostViewController.swift; path = ../PostViewController.swift; sourceTree = "<group>"; };
+		A9B4F0231ADCA5C200DBD09A /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +128,10 @@
 				A9A2D1481AD861E3009B78FE /* AppDelegate.swift */,
 				A9A2D14A1AD861E3009B78FE /* ViewController.swift */,
 				A9B4F01F1ADC70DC00DBD09A /* UserTableView.swift */,
+				A9B4F0211ADC9BCC00DBD09A /* PostViewController.swift */,
 				A9A2D14C1AD861E3009B78FE /* Main.storyboard */,
 				A9A2D14F1AD861E3009B78FE /* Images.xcassets */,
+				A9B4F0231ADCA5C200DBD09A /* blank.png */,
 				A9A2D1511AD861E3009B78FE /* LaunchScreen.xib */,
 				A9A2D1461AD861E3009B78FE /* Supporting Files */,
 			);
@@ -257,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9B4F0241ADCA5C300DBD09A /* blank.png in Resources */,
 				A9A2D14E1AD861E3009B78FE /* Main.storyboard in Resources */,
 				A9A2D1531AD861E3009B78FE /* LaunchScreen.xib in Resources */,
 				A9A2D1501AD861E3009B78FE /* Images.xcassets in Resources */,
@@ -277,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9B4F0221ADC9BCC00DBD09A /* PostViewController.swift in Sources */,
 				A9B4F0201ADC70DC00DBD09A /* UserTableView.swift in Sources */,
 				A9A2D14B1AD861E3009B78FE /* ViewController.swift in Sources */,
 				A9A2D1491AD861E3009B78FE /* AppDelegate.swift in Sources */,
